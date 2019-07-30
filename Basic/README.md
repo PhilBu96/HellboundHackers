@@ -132,3 +132,21 @@ From here, it is simple enough to go through the url and manually insert the cor
 	//http://www.hellboundhackers.org/challenges/basic17/baysick-seventeen.complete.php?pass=elite
 ```
 
+###Basic 18
+This is a very tricky challenge but not so difficult. All we have to do is to inject an SQL statement into the URL.
+Simply write an UNION-Statement next to the "id=1" (for example) which selects articles 1-5 from the table "Articles". This is a "blind" SQL injection as you can read here: https://www.owasp.org/index.php/Blind_SQL_Injection
+
+###Basic 19
+Just start the developer tools of your web browser and go to the (in Google Chrome) "network" tab. When you are recording (red dot in the upper left corner) simply reload the page. Now you can see all the files which are delivered by the server. Click on the "basic19/" one. Now switch to "headers" and look for the password and the encryption method. The rest is very simple ;-)
+
+###Basic 20
+This is a little tricky one and when you think, you made it. YOU NOT! Your first attempt should be login as the given "fire" user. Then edit the "whoami" cookie with a plugin or the developer tools to "admin" and reload the site. Then you'll get a nice message which says:
+```
+Nice try, but that isn't the answer we were looking for, there is another way to bypass this login,
+maybe it's a MySQL login that uses cookies...
+```
+Well, lets do this ;-) Just create an SQL statement as the new "whoami" value for the cookie which leads you to "true" like this:
+```
+admin' or '1=1'
+```
+By the way: It doesn't matter if you take admin as a user or not. The crucial thing here is 1=1, which always makes it true.
